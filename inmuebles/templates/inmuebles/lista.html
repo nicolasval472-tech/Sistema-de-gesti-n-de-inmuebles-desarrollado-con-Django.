@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Inmuebles</title>
+</head>
+<body>
+
+    <h1>Lista de Inmuebles</h1>
+
+    <a href="{% url 'crear_inmueble' %}">
+        <button>Agregar Inmueble</button>
+    </a>
+
+    <hr>
+
+    {% if inmuebles %}
+
+        {% for inmueble in inmuebles %}
+
+            <h2>{{ inmueble.titulo }}</h2>
+
+            <p><strong>Descripción:</strong> {{ inmueble.descripcion }}</p>
+
+            <p><strong>Precio:</strong> ${{ inmueble.precio }}</p>
+
+            <p><strong>Ciudad:</strong> {{ inmueble.ciudad }}</p>
+
+            <p><strong>Dirección:</strong> {{ inmueble.direccion }}</p>
+
+            <p>
+                <strong>Estado:</strong>
+
+                {% if inmueble.estado %}
+                    Disponible
+                {% else %}
+                    No disponible
+                {% endif %}
+            </p>
+
+            <a href="{% url 'editar_inmueble' inmueble.id %}">
+                <button>Editar</button>
+            </a>
+
+            <a href="{% url 'eliminar_inmueble' inmueble.id %}">
+                <button>Eliminar</button>
+            </a>
+
+            <hr>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>No hay inmuebles registrados.</p>
+
+    {% endif %}
+
+</body>
+</html>
