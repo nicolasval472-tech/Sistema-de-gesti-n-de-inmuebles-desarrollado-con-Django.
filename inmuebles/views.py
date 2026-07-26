@@ -1,9 +1,14 @@
+# Importación de funciones necesarias de Django
 from django.shortcuts import render, redirect, get_object_or_404
+
+# Importación del modelo Inmueble
 from .models import Inmueble
+
+# Importación del formulario de inmuebles
 from .forms import InmuebleForm
 
 
-# LISTAR
+# Vista para listar todos los inmuebles registrados
 def lista_inmuebles(request):
     inmuebles = Inmueble.objects.all()
     return render(request, 'inmuebles/lista.html', {
@@ -11,7 +16,7 @@ def lista_inmuebles(request):
     })
 
 
-# CREAR
+# Vista para registrar un nuevo inmueble
 def crear_inmueble(request):
     if request.method == 'POST':
         formulario = InmuebleForm(request.POST)
@@ -27,7 +32,7 @@ def crear_inmueble(request):
     })
 
 
-# EDITAR
+# Vista para editar la información de un inmueble
 def editar_inmueble(request, id):
     inmueble = get_object_or_404(Inmueble, id=id)
 
@@ -45,7 +50,7 @@ def editar_inmueble(request, id):
     })
 
 
-# ELIMINAR
+# Vista para eliminar un inmueble del sistema
 def eliminar_inmueble(request, id):
     inmueble = get_object_or_404(Inmueble, id=id)
 
